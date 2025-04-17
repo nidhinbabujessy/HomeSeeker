@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameMan : MonoBehaviour
 {
@@ -28,7 +29,13 @@ public class GameMan : MonoBehaviour
     [Header("Timer ")]
     [SerializeField] private TMP_Text TimerText;
     public int Time=15;
-    
+
+    [Header("Timer ")]
+    [SerializeField] private TMP_Text Scoretext;
+    [Header("Score ")]
+    public int score;
+    [SerializeField] private TMP_Text Highscore;
+
 
 
     private int rows = 5;
@@ -51,8 +58,10 @@ public class GameMan : MonoBehaviour
 
     private void Start()
     {
+       // levelNext();
         LoadLevel(currentLevel);
         winSpawn();
+        loadScore();
 
     }
 
@@ -80,6 +89,7 @@ public class GameMan : MonoBehaviour
         LoadLevelData(level);
         CenterParent();
         SpawnGrid();
+        loadScore();
 
     }
 
@@ -189,7 +199,7 @@ public class GameMan : MonoBehaviour
             Rigidbody2D rbFirstObject = firstObject.GetComponent<Rigidbody2D>();
             rbFirstObject.linearVelocity =  Vector2.zero;
             rbFirstObject.angularDamping = 0;
-            rbFirstObject.bodyType = RigidbodyType2D.Dynamic;
+            rbFirstObject.bodyType = RigidbodyType2D.Kinematic;
             // Ball.Instance.startstage();
 
             //  Ball.Instance.startstage2(spawnPosition); // 👈 updated method
@@ -202,15 +212,36 @@ public class GameMan : MonoBehaviour
         }
     }
 
+    #endregion
 
+    #region Level
 
-    public void level2()
+    //public void loadlevelfromHome()
+    //{
+    //    SceneManager.LoadScene("SamplScene");
+    //    levelNext();
+    //}
+    public void levelNext()
     {
+        //ResetGame();
+        //LoadLevel(GameManager.Instance.NextLevel);
+        int index = GameManager.Instance.NextLevel;
         ResetGame();
-        LoadLevel(2);
-        
-    }
+        LoadLevel(index);
+        print("level is = " + index);
 
+
+    }
+    public void RetryLevel()
+    {
+        int index = GameManager.Instance.CurrentLevel;
+        ResetGame();
+        LoadLevel(index);
+    }
+    public void homeScene()
+    {
+        SceneManager.LoadScene("Home");
+    }
     #endregion
 
 
@@ -220,6 +251,10 @@ public class GameMan : MonoBehaviour
         Ball.Instance.startstage();
         win.SetActive(false);
         // Destroy(lastObjectWin);
+        WinNFailPopUp.Instance.winReset();
+
+        //time
+        currentTime=0;
     }
     #endregion
 
@@ -228,7 +263,13 @@ public class GameMan : MonoBehaviour
 
     public void winMethod()
     {
+       
         win.SetActive(true);
+        WinNFailPopUp.Instance.StarEnable();
+        GameManager.Instance.AddScore(WinNFailPopUp.Instance.scoreEarned);
+        loadScore();
+        GameManager.Instance.LevelUpdate();
+        
     }
     #endregion
 
@@ -264,7 +305,7 @@ public class GameMan : MonoBehaviour
 
     private void UpdateTimerText()
     {
-        TimerText.text = "Time: " + currentTime.ToString("D2");
+        TimerText.text = currentTime.ToString("D2");
     }
 
     private void TimerEnd()
@@ -280,6 +321,18 @@ public class GameMan : MonoBehaviour
             StopCoroutine(timerCoroutine);
             timerCoroutine = null;
         }
+    }
+
+    #endregion
+
+    #region Score
+
+    void loadScore()
+    {
+        score= GameManager.Instance.score;
+        Scoretext.text=score.ToString();
+        Highscore.text=score.ToString();
+        print("score loaded");
     }
 
     #endregion

@@ -106,7 +106,7 @@ public class Ball : MonoBehaviour
                 print("rb is kinematic");
             }
 
-            WinNFailPopUp.Instance.StarEnable();
+            
 
 
         }
