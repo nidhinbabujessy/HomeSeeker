@@ -58,8 +58,9 @@ public class GameMan : MonoBehaviour
 
     private void Start()
     {
-       // levelNext();
-        LoadLevel(currentLevel);
+        // levelNext();
+        int index = GameManager.Instance.LevelIndex;
+        LoadLevel(index);
         winSpawn();
         loadScore();
 
@@ -240,7 +241,7 @@ public class GameMan : MonoBehaviour
     }
     public void homeScene()
     {
-        SceneManager.LoadScene("Home");
+        SceneManager.LoadScene("Menu");
     }
     #endregion
 
@@ -269,7 +270,8 @@ public class GameMan : MonoBehaviour
         GameManager.Instance.AddScore(WinNFailPopUp.Instance.scoreEarned);
         loadScore();
         GameManager.Instance.LevelUpdate();
-        
+      
+
     }
     #endregion
 

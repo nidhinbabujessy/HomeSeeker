@@ -9,6 +9,8 @@ TagManager:
   - Win
   - Ball
   - Border
+  - 1
+  - 2
   layers:
   - Default
   - TransparentFX
