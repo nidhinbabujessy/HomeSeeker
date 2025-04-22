@@ -25,6 +25,7 @@ public class GameMan : MonoBehaviour
 
     [Header("Win")]
     [SerializeField] private GameObject win;
+    [SerializeField] private GameObject lose;
 
     [Header("Timer ")]
     [SerializeField] private TMP_Text TimerText;
@@ -32,6 +33,9 @@ public class GameMan : MonoBehaviour
 
     [Header("Timer ")]
     [SerializeField] private TMP_Text Scoretext;
+
+    [Header("Exit")]
+    [SerializeField] private GameObject exit;
 
     [Header("Score ")]
     public int score;
@@ -308,6 +312,7 @@ public class GameMan : MonoBehaviour
     {
        // Ball.Instance.startstage();
         win.SetActive(false);
+        lose.SetActive(false);
         // Destroy(lastObjectWin);
         WinNFailPopUp.Instance.winReset();
 
@@ -375,6 +380,7 @@ public class GameMan : MonoBehaviour
     private void TimerEnd()
     {
         Debug.Log("⏰ Time's up!");
+        lose.SetActive(true );
         // Add game over, next level, or popup logic here
     }
 
@@ -400,4 +406,19 @@ public class GameMan : MonoBehaviour
     }
 
     #endregion
-}
+
+
+    #region Exit
+
+    public void exitEnable()
+    {
+        exit.SetActive(true );
+        GameManager.Instance.timeStop();
+    }
+    public void exitdisable()
+    {
+        GameManager.Instance.timeStart();
+        exit.SetActive(false);
+    }
+    #endregion
+} 

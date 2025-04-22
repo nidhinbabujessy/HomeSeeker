@@ -178,8 +178,19 @@ public class GameManager : MonoBehaviour
         print("pivot current l  " + pivotCurrent);
         print("pivot next l  " + pivotNext);
         print("level index l  " + LevelIndex);
+
+      
     }
     // random level load
 
     #endregion
+
+    public void timeStop()
+    {
+        Time.timeScale = 0f;
+    }
+    public void timeStart()
+    {
+        Time.timeScale = 1f;
+    }
 }
