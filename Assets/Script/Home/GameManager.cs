@@ -13,10 +13,14 @@ public class GameManager : MonoBehaviour
 
     [Header("Level Settings")]
     public int CurrentLevel = 0;
+    public int pivotCurrent = 0;
+    public int pivotNext = 1;
     public int NextLevel = 1;
     public int LevelIndex = 1;
 
     private const string CurrentLevelKey = "CurrentLevel";
+    private const string PivotCurrentKey = "pivotCurrent";
+    private const string PivotNextKey = "pivotNext";
     private const string NextLevelKey = "NextLevel";
     private const string ButtonsToEnableKey = "ButtonsToEnable";
 
@@ -98,11 +102,22 @@ public class GameManager : MonoBehaviour
 
     public void LevelUpdate()
     {
-        CurrentLevel++;
-        NextLevel++;
-        buttonsToEnable++;
+        printlevel();
+        if (pivotCurrent == LevelIndex)
+        {
+            pivotCurrent++;
+            pivotNext++;
+        }
+        else
+        {
+            CurrentLevel++;
+            NextLevel++;
+
+            buttonsToEnable++;
+        }
         print(buttonsToEnable + "3");
         SaveLevelData();
+        printlevel();
     }
 
     private void SaveLevelData()
@@ -110,6 +125,8 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt(CurrentLevelKey, CurrentLevel);
         PlayerPrefs.SetInt(NextLevelKey, NextLevel);
         PlayerPrefs.SetInt(ButtonsToEnableKey, buttonsToEnable);
+        PlayerPrefs.SetInt(PivotCurrentKey, pivotCurrent);
+        PlayerPrefs.SetInt(PivotNextKey, pivotNext);
         print(buttonsToEnable + "4");
         PlayerPrefs.Save();
     }
@@ -137,8 +154,32 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.DeleteKey(CurrentLevelKey);
         PlayerPrefs.DeleteKey(NextLevelKey);
         PlayerPrefs.DeleteKey(ButtonsToEnableKey);
+
+        PlayerPrefs.DeleteKey(PivotCurrentKey);
+        PlayerPrefs.DeleteKey(PivotNextKey);
+
+
+        buttonsToEnable = 1;
         print(buttonsToEnable + "5");
-    } 
+
+        CurrentLevel = 0;
+        NextLevel = 1;
+        LevelIndex = 1;
+
+        pivotCurrent = 0;
+        pivotNext = 1;
+    }
+
+
+    public void printlevel()
+    {
+        print("current l  "+CurrentLevel);
+        print("next l  " + NextLevel);
+        print("pivot current l  " + pivotCurrent);
+        print("pivot next l  " + pivotNext);
+        print("level index l  " + LevelIndex);
+    }
+    // random level load
 
     #endregion
 }

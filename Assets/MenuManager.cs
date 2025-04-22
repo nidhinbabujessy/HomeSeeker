@@ -33,9 +33,15 @@ public class MenuManager : MonoBehaviour
 
             if (int.TryParse(tagValue, out int levelIndex))
             {
+                if(GameManager.Instance.pivotCurrent<GameManager.Instance.CurrentLevel)
+                {
+                    GameManager.Instance.pivotCurrent=levelIndex;
+                    GameManager.Instance.pivotNext=levelIndex+1;
+                }
                 Debug.Log("Clicked Level Tag: " + levelIndex);
                GameManager.Instance.LevelIndex = levelIndex;
                 StartCoroutine(WaitAndLoadLevel());
+                GameManager.Instance.printlevel();
             }
             else
             {

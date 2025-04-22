@@ -32,6 +32,7 @@ public class GameMan : MonoBehaviour
 
     [Header("Timer ")]
     [SerializeField] private TMP_Text Scoretext;
+
     [Header("Score ")]
     public int score;
     [SerializeField] private TMP_Text Highscore;
@@ -60,14 +61,16 @@ public class GameMan : MonoBehaviour
     {
         // levelNext();
         int index = GameManager.Instance.LevelIndex;
+        print(index);
         LoadLevel(index);
         winSpawn();
         loadScore();
+        ResetGame();
 
     }
 
     #region LEVEL DESIGN
-
+     
     void winSpawn()
     {
         Vector2 scaleWin = new Vector2(0.07767631f, 0.07922984f);
@@ -191,20 +194,48 @@ public class GameMan : MonoBehaviour
             }
         }
 
+        //if (firstTileObject != null)
+        //{
+        //    // Vector3 spawnPosition = firstTileObject.transform.position;
+
+        //    firstObject.SetActive(true);
+        //    firstObject.transform.position = firstTileObject.transform.position;
+        //    Rigidbody2D rbFirstObject = firstObject.GetComponent<Rigidbody2D>();
+        //    rbFirstObject.linearVelocity =  Vector2.zero;
+        //    rbFirstObject.angularDamping = 0;
+        //    rbFirstObject.bodyType = RigidbodyType2D.Kinematic;
+
+        //    //gyro off
+
+        //    //  rbFirstObject.bodyType = RigidbodyType2D.Kinematic;
+
+        //    //  Ball.Instance.startstage2(spawnPosition); // 👈 updated method
+        //}
+
         if (firstTileObject != null)
         {
-            // Vector3 spawnPosition = firstTileObject.transform.position;
-
             firstObject.SetActive(true);
             firstObject.transform.position = firstTileObject.transform.position;
-            Rigidbody2D rbFirstObject = firstObject.GetComponent<Rigidbody2D>();
-            rbFirstObject.linearVelocity =  Vector2.zero;
-            rbFirstObject.angularDamping = 0;
-            rbFirstObject.bodyType = RigidbodyType2D.Kinematic;
-            // Ball.Instance.startstage();
+            Ball.Instance.InitialStage();
 
-            //  Ball.Instance.startstage2(spawnPosition); // 👈 updated method
+         //   Rigidbody2D rbFirstObject = firstObject.GetComponent<Rigidbody2D>();
+          //  rbFirstObject.linearVelocity = Vector2.zero;
+           // rbFirstObject.angularDamping = 0;
+          //  rbFirstObject.bodyType = RigidbodyType2D.Kinematic;
+
+            // Get Ball script on this firstObject
+            //Ball ballScript = firstObject.GetComponent<Ball>();
+            //if (ballScript != null)
+            //{
+            //    ballScript.startstage2(firstTileObject.transform.position);
+            //}
+            //else
+            //{
+            //    Debug.LogError("Ball component not found on firstObject.");
+            //}
+
         }
+
 
         if (lastTileObject != null)
         {
@@ -226,30 +257,56 @@ public class GameMan : MonoBehaviour
     {
         //ResetGame();
         //LoadLevel(GameManager.Instance.NextLevel);
-        int index = GameManager.Instance.NextLevel;
-        ResetGame();
-        LoadLevel(index);
-        print("level is = " + index);
+     //   int index = GameManager.Instance.NextLevel;
+        //  ResetGame();
+      //  LoadLevel(index);
+     //   GameManager.Instance.LevelUpdate();
+          win.SetActive(false);
+        //  print("level is = " + index);
+        if (GameManager.Instance.LevelIndex == GameManager.Instance.CurrentLevel)
+        {
+            GameManager.Instance.LevelIndex = GameManager.Instance.NextLevel;
+           
+        }
+        else
+        {
+            GameManager.Instance.LevelIndex = GameManager.Instance.pivotNext;
+            print("level index = pivet next");
 
+        }
+        GameManager.Instance.printlevel();
+        SceneManager.LoadScene("SampleScene");
 
     }
     public void RetryLevel()
     {
-        int index = GameManager.Instance.CurrentLevel;
-        ResetGame();
-        LoadLevel(index);
+        if (GameManager.Instance.pivotCurrent < GameManager.Instance.CurrentLevel)
+        {
+            GameManager.Instance.LevelIndex = GameManager.Instance.pivotCurrent;
+        }
+        else
+        {
+            GameManager.Instance.LevelIndex = GameManager.Instance.CurrentLevel;
+        }
+        GameManager.Instance.printlevel();
+        SceneManager.LoadScene("SampleScene");
     }
     public void homeScene()
     {
         SceneManager.LoadScene("Menu");
     }
+
+
+
+
+
     #endregion
 
 
     #region reset
     void ResetGame()
     {
-        Ball.Instance.startstage();
+       // Ball.Instance.startstage();
         win.SetActive(false);
         // Destroy(lastObjectWin);
         WinNFailPopUp.Instance.winReset();
@@ -264,12 +321,17 @@ public class GameMan : MonoBehaviour
 
     public void winMethod()
     {
-       
+       // ResetGame();
+
         win.SetActive(true);
         WinNFailPopUp.Instance.StarEnable();
         GameManager.Instance.AddScore(WinNFailPopUp.Instance.scoreEarned);
         loadScore();
-        GameManager.Instance.LevelUpdate();
+       if (GameManager.Instance.NextLevel == GameManager.Instance.LevelIndex)
+        {
+            print(GameManager.Instance.NextLevel + "---");
+            GameManager.Instance.LevelUpdate();
+        }
       
 
     }
