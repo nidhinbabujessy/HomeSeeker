@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using static UnityEngine.GraphicsBuffer;
 
 public class GameMan : MonoBehaviour
 {
@@ -41,7 +42,11 @@ public class GameMan : MonoBehaviour
     public int score;
     [SerializeField] private TMP_Text Highscore;
 
-
+    //SLPASH ANIMATION
+    public Transform target;
+    public Transform target2;
+    [SerializeField] private GameObject SPASH;
+    [SerializeField] private GameObject SPASHPARENT;
 
     private int rows = 5;
     private int columns = 5;
@@ -63,6 +68,7 @@ public class GameMan : MonoBehaviour
 
     private void Start()
     {
+      
         // levelNext();
         int index = GameManager.Instance.LevelIndex;
         print(index);
@@ -70,11 +76,104 @@ public class GameMan : MonoBehaviour
         winSpawn();
         loadScore();
         ResetGame();
+        SPASHPARENT.SetActive(true);
+        StartCoroutine(WaitAndLoadLevel());
+        
 
     }
 
+    #region splash animation
+    IEnumerator WaitAndLoadLevel()
+    {
+       
+        ThrowBall(SPASH,SPASHPARENT);
+        yield return new WaitForSeconds(2f);
+
+     //   SPASHPARENT.SetActive(false);
+        // You can replace this with a dynamic level name like "Level_1", "Level_2", etc.
+
+    }
+    // animation
+    void ThrowBall(GameObject obj, GameObject obj2)
+    {
+        float duration = 1f;
+
+        // Move toward the wall
+        LeanTween.move(obj, target.position, duration)
+                 .setEase(LeanTweenType.easeInExpo);
+
+        // Fade out at the same time
+        LeanTween.value(obj, 1f, 0f, duration).setOnUpdate((float val) =>
+        {
+            SetObjectAlpha(obj, val);
+        });
+        LeanTween.value(obj2, 1f, 0f, duration).setOnUpdate((float val) =>
+        {
+            SetObjectAlpha(obj, val);
+        });
+    }
+
+
+    void SetObjectAlpha(GameObject obj, float alpha)
+    {
+        var sr = obj.GetComponent<SpriteRenderer>();
+        if (sr != null)
+        {
+            Color c = sr.color;
+            c.a = alpha;
+            sr.color = c;
+        }
+
+        var img = obj.GetComponent<UnityEngine.UI.Image>();
+        if (img != null)
+        {
+            Color c = img.color;
+            c.a = alpha;
+            img.color = c;
+        }
+
+        var canvasGroup = obj.GetComponent<CanvasGroup>();
+        if (canvasGroup != null)
+        {
+            canvasGroup.alpha = alpha;
+        }
+    }
+
+    IEnumerator StartAnimationAndLoadScene()
+    {
+        ForWardThrowBall(SPASH);
+        yield return new WaitForSeconds(2f); // Let the animation play
+        win.SetActive(false);
+        lose.SetActive(false);
+        SceneManager.LoadScene("SampleScene");
+    }
+
+    void ForWardThrowBall(GameObject obj)
+    {
+        SPASH.SetActive(true);
+        float fadeDuration = 0.5f;
+        float moveDuration = 1f;
+
+        // Set initial alpha to 0 (fully transparent)
+        SetObjectAlpha(obj, 0f);
+
+        // Fade in
+        LeanTween.value(obj, 0f, 1f, fadeDuration).setOnUpdate((float val) =>
+        {
+            SetObjectAlpha(obj, val);
+        }).setOnComplete(() =>
+        {
+            // Move after fade-in completes
+            LeanTween.move(obj, target2.position, moveDuration)
+                     .setEase(LeanTweenType.easeInExpo);
+        });
+    }
+
+
+    #endregion
+
     #region LEVEL DESIGN
-     
+
     void winSpawn()
     {
         Vector2 scaleWin = new Vector2(0.07767631f, 0.07922984f);
@@ -252,51 +351,43 @@ public class GameMan : MonoBehaviour
 
     #region Level
 
-    //public void loadlevelfromHome()
-    //{
-    //    SceneManager.LoadScene("SamplScene");
-    //    levelNext();
-    //}
+
     public void levelNext()
     {
-        //ResetGame();
-        //LoadLevel(GameManager.Instance.NextLevel);
-     //   int index = GameManager.Instance.NextLevel;
-        //  ResetGame();
-      //  LoadLevel(index);
-     //   GameManager.Instance.LevelUpdate();
-          win.SetActive(false);
-        //  print("level is = " + index);
+       
+
         if (GameManager.Instance.LevelIndex == GameManager.Instance.CurrentLevel)
         {
             GameManager.Instance.LevelIndex = GameManager.Instance.NextLevel;
-           
         }
         else
         {
             GameManager.Instance.LevelIndex = GameManager.Instance.pivotNext;
-            print("level index = pivet next");
-
+            print("level index = pivot next");
         }
-        GameManager.Instance.printlevel();
-        SceneManager.LoadScene("SampleScene");
 
+        GameManager.Instance.printlevel();
+
+        StartCoroutine(StartAnimationAndLoadScene());
     }
+
     public void RetryLevel()
     {
-        if (GameManager.Instance.pivotCurrent < GameManager.Instance.CurrentLevel)
+        if (GameManager.Instance.LevelIndex == GameManager.Instance.CurrentLevel)
         {
-            GameManager.Instance.LevelIndex = GameManager.Instance.pivotCurrent;
+            GameManager.Instance.LevelIndex = GameManager.Instance.CurrentLevel;
+           
         }
         else
         {
-            GameManager.Instance.LevelIndex = GameManager.Instance.CurrentLevel;
+            GameManager.Instance.LevelIndex = GameManager.Instance.pivotCurrent;
         }
         GameManager.Instance.printlevel();
-        SceneManager.LoadScene("SampleScene");
+        StartCoroutine(StartAnimationAndLoadScene());
     }
     public void homeScene()
     {
+        GameManager.Instance.timeStart();
         SceneManager.LoadScene("Menu");
     }
 

@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public int NextLevel = 1;
     public int LevelIndex = 1;
 
+    public int PlayIndex  = 0;
+
     private const string CurrentLevelKey = "CurrentLevel";
     private const string PivotCurrentKey = "pivotCurrent";
     private const string PivotNextKey = "pivotNext";
