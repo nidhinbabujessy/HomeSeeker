@@ -18,6 +18,10 @@ public class Ball : MonoBehaviour
     public float moveSpeed = 5f;
 
     [SerializeField] private GameObject cage;
+
+    [SerializeField] private GameObject Hand;
+
+
     private SpriteRenderer cageRenderer;
 
     bool gyroMove;
@@ -26,6 +30,7 @@ public class Ball : MonoBehaviour
 
     void Start()
     {
+        Hand.SetActive(true);
         rb = GetComponent<Rigidbody2D>();
        
         gyroMove = false;
@@ -52,52 +57,33 @@ public class Ball : MonoBehaviour
     }
 
 
-    //public void startstage()
-    //{
-    //    Input.gyro.enabled = false;
-
-    //    transform.position = initialPosition;
-    //    rb.linearVelocity = Vector2.zero;
-    //    rb.angularVelocity = 0f;
-    //    rb.bodyType = RigidbodyType2D.Kinematic;
-    //    cage.SetActive(true);
-
-    //    // Reset alpha to full if reused
-    //    SetCageAlpha(1f);
-    //}
-    //public void startstage2(Vector3 spawnPosition)
-    //{
-    //    Input.gyro.enabled = false;
-
-    //    transform.position = spawnPosition;
-    //    rb.linearVelocity = Vector2.zero;
-    //    rb.angularVelocity = 0f;
-    //    rb.bodyType = RigidbodyType2D.Kinematic;
-
-    //    cage.SetActive(true);
-    //    SetCageAlpha(1f);
-    //}
-
+  
 
     private void OnMouseDown()
     {
         if (CompareTag("Ball"))
         {
+            SoundManager.Instance.PlayDestroy();
+
+            Hand.SetActive(false);
+
             print("ball");
            
             // LeanTween fade and destroy
             LeanTween.alpha(cage, 0f, 0.5f).setOnComplete(() =>
             {
                 cage.SetActive(false); // or Destroy(cage);
+                gyroMove = true;
+                Input.gyro.enabled = true;
+                rb.bodyType = RigidbodyType2D.Dynamic;
+                GameMan.instance.TimeStart();
             });
           //  Input.gyro.enabled = true;
-            gyroMove=true;
-            Input.gyro.enabled = true;
-            rb.bodyType = RigidbodyType2D.Dynamic;
-            GameMan.instance.TimeStart();
+           
         }
 
     }
+
 
     private void SetCageAlpha(float alpha)
     {
@@ -109,19 +95,14 @@ public class Ball : MonoBehaviour
         }
     }
 
-    //public void ResetVelocity()
-    //{
-    //    rb.linearVelocity = Vector2.zero;
-    //    rb.angularVelocity = 0f;
-    //    rb.bodyType = RigidbodyType2D.Kinematic;
-    //}
-
+   
 
     #region win
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("Win"))
         {
+            SoundManager.Instance.PlayHomeCollider();
             GameMan.instance.winMethod();
             GameMan.instance.StopTimer();
             Input.gyro.enabled = false;

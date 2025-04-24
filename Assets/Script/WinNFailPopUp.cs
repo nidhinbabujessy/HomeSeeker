@@ -66,9 +66,12 @@ public class WinNFailPopUp : MonoBehaviour
     {
         for (int i = 0; i < count; i++)
         {
+            SoundManager.Instance.PlayStar();
             stars[i].SetActive(true);
         }
     }
+
+
 
     public void winReset()
     {

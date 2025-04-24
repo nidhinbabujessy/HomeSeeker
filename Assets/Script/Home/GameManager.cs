@@ -30,6 +30,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Button[] levelButtons;
     public int buttonsToEnable = 0;
 
+    public Slider loadingSlider; // Assign via Inspector
+
+
+
     void Awake()
     {
         // Singleton pattern
@@ -53,6 +57,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameManager Started in Scene: " + SceneManager.GetActiveScene().name);
         print(buttonsToEnable+"1");
         StartCoroutine(MenuMethod());
+
+        //volume
+
     }
 
     #region Score Management
@@ -81,7 +88,7 @@ public class GameManager : MonoBehaviour
         score = PlayerPrefs.GetInt(ScoreKey, 0);
     }
 
-    public void ClearSavedScore()
+    void ClearSavedScore()
     {
         PlayerPrefs.DeleteKey(ScoreKey);
     }
@@ -92,8 +99,21 @@ public class GameManager : MonoBehaviour
 
     IEnumerator MenuMethod()
     {
-        yield return new WaitForSeconds(3);
-        
+        float duration = 3f;
+        float elapsed = 0f;
+
+        // Reset slider
+        if (loadingSlider != null)
+            loadingSlider.value = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            if (loadingSlider != null)
+                loadingSlider.value = Mathf.Clamp01(elapsed / duration);
+            yield return null;
+        }
+
         SceneManager.LoadScene("Menu");
     }
 
@@ -153,6 +173,8 @@ public class GameManager : MonoBehaviour
 
     public void ClearSavedLevelData()
     {
+        ClearSavedScore();
+        SoundManager.Instance.ResetVolumes();
         PlayerPrefs.DeleteKey(CurrentLevelKey);
         PlayerPrefs.DeleteKey(NextLevelKey);
         PlayerPrefs.DeleteKey(ButtonsToEnableKey);
@@ -170,6 +192,7 @@ public class GameManager : MonoBehaviour
 
         pivotCurrent = 0;
         pivotNext = 1;
+        PlayerPrefs.Save();
     }
 
 

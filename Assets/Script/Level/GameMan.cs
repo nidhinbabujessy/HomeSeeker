@@ -96,6 +96,7 @@ public class GameMan : MonoBehaviour
     // animation
     void ThrowBall(GameObject obj, GameObject obj2)
     {
+        SoundManager.Instance.PlayFadeOut();
         float duration = 1f;
 
         // Move toward the wall
@@ -150,6 +151,7 @@ public class GameMan : MonoBehaviour
 
     void ForWardThrowBall(GameObject obj)
     {
+        SoundManager.Instance.PlayFadeIn();
         SPASH.SetActive(true);
         float fadeDuration = 0.5f;
         float moveDuration = 1f;
@@ -297,23 +299,7 @@ public class GameMan : MonoBehaviour
             }
         }
 
-        //if (firstTileObject != null)
-        //{
-        //    // Vector3 spawnPosition = firstTileObject.transform.position;
-
-        //    firstObject.SetActive(true);
-        //    firstObject.transform.position = firstTileObject.transform.position;
-        //    Rigidbody2D rbFirstObject = firstObject.GetComponent<Rigidbody2D>();
-        //    rbFirstObject.linearVelocity =  Vector2.zero;
-        //    rbFirstObject.angularDamping = 0;
-        //    rbFirstObject.bodyType = RigidbodyType2D.Kinematic;
-
-        //    //gyro off
-
-        //    //  rbFirstObject.bodyType = RigidbodyType2D.Kinematic;
-
-        //    //  Ball.Instance.startstage2(spawnPosition); // 👈 updated method
-        //}
+       
 
         if (firstTileObject != null)
         {
@@ -321,21 +307,7 @@ public class GameMan : MonoBehaviour
             firstObject.transform.position = firstTileObject.transform.position;
             Ball.Instance.InitialStage();
 
-         //   Rigidbody2D rbFirstObject = firstObject.GetComponent<Rigidbody2D>();
-          //  rbFirstObject.linearVelocity = Vector2.zero;
-           // rbFirstObject.angularDamping = 0;
-          //  rbFirstObject.bodyType = RigidbodyType2D.Kinematic;
-
-            // Get Ball script on this firstObject
-            //Ball ballScript = firstObject.GetComponent<Ball>();
-            //if (ballScript != null)
-            //{
-            //    ballScript.startstage2(firstTileObject.transform.position);
-            //}
-            //else
-            //{
-            //    Debug.LogError("Ball component not found on firstObject.");
-            //}
+      
 
         }
 
@@ -354,7 +326,7 @@ public class GameMan : MonoBehaviour
 
     public void levelNext()
     {
-       
+        SoundManager.Instance.PlayClick();
 
         if (GameManager.Instance.LevelIndex == GameManager.Instance.CurrentLevel)
         {
@@ -373,6 +345,7 @@ public class GameMan : MonoBehaviour
 
     public void RetryLevel()
     {
+        SoundManager.Instance.PlayClick();
         if (GameManager.Instance.LevelIndex == GameManager.Instance.CurrentLevel)
         {
             GameManager.Instance.LevelIndex = GameManager.Instance.CurrentLevel;
@@ -387,6 +360,7 @@ public class GameMan : MonoBehaviour
     }
     public void homeScene()
     {
+        SoundManager.Instance.PlayClick();
         GameManager.Instance.timeStart();
         SceneManager.LoadScene("Menu");
     }
@@ -401,6 +375,7 @@ public class GameMan : MonoBehaviour
     #region reset
     void ResetGame()
     {
+
        // Ball.Instance.startstage();
         win.SetActive(false);
         lose.SetActive(false);
@@ -417,8 +392,8 @@ public class GameMan : MonoBehaviour
 
     public void winMethod()
     {
-       // ResetGame();
-
+        // ResetGame();
+        SoundManager.Instance.PlayWin();
         win.SetActive(true);
         WinNFailPopUp.Instance.StarEnable();
         GameManager.Instance.AddScore(WinNFailPopUp.Instance.scoreEarned);
@@ -468,13 +443,14 @@ public class GameMan : MonoBehaviour
         TimerText.text = currentTime.ToString("D2");
     }
 
+    //=============================================FAIL====================
     private void TimerEnd()
     {
         Debug.Log("⏰ Time's up!");
         lose.SetActive(true );
-        // Add game over, next level, or popup logic here
+        SoundManager.Instance.PlayFail();        // Add game over, next level, or popup logic here
     }
-
+    //==================================================================
     public void StopTimer()
     {
         if (timerCoroutine != null)
@@ -503,11 +479,13 @@ public class GameMan : MonoBehaviour
 
     public void exitEnable()
     {
+        SoundManager.Instance.PlayClick();
         exit.SetActive(true );
         GameManager.Instance.timeStop();
     }
     public void exitdisable()
     {
+        SoundManager.Instance.PlayClick();
         GameManager.Instance.timeStart();
         exit.SetActive(false);
     }

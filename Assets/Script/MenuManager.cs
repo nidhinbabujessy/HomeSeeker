@@ -24,11 +24,26 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject parentSplash;
     [SerializeField] private GameObject AniamtedObject;
 
+    [Header("Music")]
+    [SerializeField] private Slider bgmSlider;
+    [SerializeField] private Slider sfxSlider;
+
     void Start()
     {
         parentSplash.SetActive(false);
         buttonsstrength = GameManager.Instance.buttonsToEnable;
         EnableButtons();
+
+        // Volume
+        // Set initial slider values from SoundManager
+        if (SoundManager.Instance != null)
+        {
+            bgmSlider.value = SoundManager.Instance.GetBGMVolume();
+            sfxSlider.value = SoundManager.Instance.GetSFXVolume();
+        }
+
+        bgmSlider.onValueChanged.AddListener(SetBGMVolume);
+        sfxSlider.onValueChanged.AddListener(SetSFXVolume);
     }
 
     // Update is called once per frame
@@ -37,14 +52,31 @@ public class MenuManager : MonoBehaviour
         score.text = GameManager.Instance.score.ToString();
     }
 
+    #region Music
+    public void SetBGMVolume(float volume)
+    {
+        SoundManager.Instance?.SetBGMVolume(volume);
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        SoundManager.Instance?.SetSFXVolume(volume);
+    }
+
+    #endregion
+
+
+
     #region Level
     public void LevelButtonClicked()
     {
+        SoundManager.Instance.PlayClick();
         GameObject clickedButton = EventSystem.current.currentSelectedGameObject;
 
         if (clickedButton != null)
         {
-            string tagValue = clickedButton.tag;
+             string tagValue = clickedButton.tag;
+        //    int tagValue = ;
 
             if (int.TryParse(tagValue, out int levelIndex))
             {
@@ -83,6 +115,7 @@ public class MenuManager : MonoBehaviour
     // animation
     void ThrowBall(GameObject obj)
     {
+        SoundManager.Instance.PlayFadeIn();
         float fadeDuration = 0.5f;
         float moveDuration = 1f;
 
@@ -116,7 +149,8 @@ public class MenuManager : MonoBehaviour
 
     public void Play()
     {
-        if(GameManager.Instance.LevelIndex>GameManager.Instance.PlayIndex)
+        SoundManager.Instance.PlayClick();
+        if (GameManager.Instance.LevelIndex>GameManager.Instance.PlayIndex)
         {
             GameManager.Instance.PlayIndex=GameManager.Instance.LevelIndex;
         }
@@ -138,6 +172,7 @@ public class MenuManager : MonoBehaviour
     //============= Reset all the Game=======
     public void ResetGame()
     {
+        SoundManager.Instance.PlayClick();
         GameManager.Instance.ClearSavedLevelData();
         SceneManager.LoadScene("Menu");
     }
@@ -155,11 +190,13 @@ public class MenuManager : MonoBehaviour
 
     public void SettingssEnable()
     {
+        SoundManager.Instance.PlayClick();
         settings.SetActive(true);
     }
 
     public void SettingsDisable()
     {
+        SoundManager.Instance.PlayClick();
         settings.SetActive(false);
     }
 
