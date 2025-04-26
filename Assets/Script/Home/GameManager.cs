@@ -127,17 +127,25 @@ public class GameManager : MonoBehaviour
         printlevel();
         if (pivotCurrent == LevelIndex)
         {
-            pivotCurrent++;
             pivotNext++;
+           // if (pivotNext > 1)
+            {
+                pivotCurrent++;
+            }
+            
         }
         else
         {
-            CurrentLevel++;
             NextLevel++;
+           // if (NextLevel > 1)
+            {
+                CurrentLevel++;
+            }
+           
 
             buttonsToEnable++;
         }
-        print(buttonsToEnable + "3");
+        print(buttonsToEnable + " = EnableButtons");
         SaveLevelData();
         printlevel();
     }

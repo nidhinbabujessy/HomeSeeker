@@ -283,14 +283,18 @@ public class GameMan : MonoBehaviour
                 // Store the first and last path tiles
                 if (isPath)
                 {
+                    print("its path");
                     PathTile currentTile = currentPathTiles.Find(p => p.row == row && p.col == col);
+                    print("current tile = "+currentTile);
                     if (currentTile.Equals(currentPathTiles[0]))
                     {
                         firstTileObject = tile;
+                        Debug.Log("1 last Path tile at: " + tile);
                     }
                     if (currentTile.Equals(currentPathTiles[currentPathTiles.Count - 1]))
                     {
                         lastTileObject = tile;
+                        Debug.Log("1 last Path tile at: " + tile);
 
                     }
 
@@ -316,7 +320,9 @@ public class GameMan : MonoBehaviour
         {
             lastObjectWin.SetActive(true);
             lastObjectWin.transform.position = lastTileObject.transform.position;
+            Debug.Log("2 last Path tile at: " + lastTileObject);
         }
+      
     }
 
     #endregion
@@ -348,12 +354,26 @@ public class GameMan : MonoBehaviour
         SoundManager.Instance.PlayClick();
         if (GameManager.Instance.LevelIndex == GameManager.Instance.CurrentLevel)
         {
-            GameManager.Instance.LevelIndex = GameManager.Instance.CurrentLevel;
+            if (GameManager.Instance.CurrentLevel == 0)
+            {
+                GameManager.Instance.LevelIndex = 1;
+            }
+            else
+            {
+                GameManager.Instance.LevelIndex = GameManager.Instance.CurrentLevel;
+            }
            
         }
         else
         {
-            GameManager.Instance.LevelIndex = GameManager.Instance.pivotCurrent;
+            if (GameManager.Instance.pivotCurrent == 0)
+            {
+                GameManager.Instance.LevelIndex = 1;
+            }
+            else
+            {
+                GameManager.Instance.LevelIndex = GameManager.Instance.pivotCurrent;
+            }
         }
         GameManager.Instance.printlevel();
         StartCoroutine(StartAnimationAndLoadScene());

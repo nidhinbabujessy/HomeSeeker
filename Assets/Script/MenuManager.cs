@@ -71,28 +71,31 @@ public class MenuManager : MonoBehaviour
     public void LevelButtonClicked()
     {
         SoundManager.Instance.PlayClick();
+
         GameObject clickedButton = EventSystem.current.currentSelectedGameObject;
 
         if (clickedButton != null)
         {
-             string tagValue = clickedButton.tag;
-        //    int tagValue = ;
+            ButtonIndex buttonIndex = clickedButton.GetComponent<ButtonIndex>();
 
-            if (int.TryParse(tagValue, out int levelIndex))
+            if (buttonIndex != null)
             {
-                if(GameManager.Instance.pivotCurrent<GameManager.Instance.CurrentLevel)
+                int levelIndex = buttonIndex.index;
+
+                if (GameManager.Instance.pivotCurrent < GameManager.Instance.CurrentLevel)
                 {
-                    GameManager.Instance.pivotCurrent=levelIndex;
-                    GameManager.Instance.pivotNext=levelIndex+1;
+                    GameManager.Instance.pivotCurrent = levelIndex-1;
+                    GameManager.Instance.pivotNext = levelIndex ;
                 }
-                Debug.Log("Clicked Level Tag: " + levelIndex);
-               GameManager.Instance.LevelIndex = levelIndex;
+
+                Debug.Log("Clicked Level Index: " + levelIndex);
+                GameManager.Instance.LevelIndex = levelIndex;
                 StartCoroutine(WaitAndLoadLevel());
                 GameManager.Instance.printlevel();
             }
             else
             {
-                Debug.LogWarning("Button tag is not a valid level index.");
+                Debug.LogWarning("Button does not have ButtonIndex component.");
             }
         }
         else
@@ -100,7 +103,6 @@ public class MenuManager : MonoBehaviour
             Debug.LogWarning("No button was clicked.");
         }
     }
-
     IEnumerator WaitAndLoadLevel()
     {
         parentSplash.SetActive(true);
@@ -165,6 +167,7 @@ public class MenuManager : MonoBehaviour
         for (int i = 0; i < buttonsstrength; i++)
         {
             levelButtons[i].interactable = true;
+            print(" EnableButtons = " + buttonsstrength);
         }
     }
 

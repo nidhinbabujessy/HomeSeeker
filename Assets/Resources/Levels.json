@@ -1,119 +1,150 @@
 {
-    "levels": [
-      {
-        "level": 1,
-        "paths": [
-         
+  "levels": [
+    {
+      "level": 1,
+      "paths": [
+       
 
-          { "row": 1, "col": 1 },
-          { "row": 2, "col": 1 },
-          { "row": 2, "col": 2 },
-          { "row": 2, "col": 3 }
-        ]
-      },
-      {
-        "level": 2,
-        "paths": [
-          { "row": 1, "col": 1 },
-          { "row": 1, "col": 2 },
-          { "row": 1, "col": 3 },
-         
-          { "row": 2, "col": 3 }
-        ]
-      },
-      {
-        "level": 3,
-        "paths": [
-          { "row": 1, "col": 1 },
-          { "row": 2, "col": 1 },
-          { "row": 2, "col": 2 },
-         
-          { "row": 2, "col": 3 },
-          { "row": 3, "col": 3 }
-        ]
-      },
-      {
-        "level": 4,
-        "paths": [
-          { "row": 1, "col": 3 },
-          { "row": 2, "col": 3 },
-          { "row": 2, "col": 2 },
-         
-          { "row": 2, "col": 1 },
-          { "row": 3, "col": 1 }
-        ]
-      },
-      {
-        "level": 5,
-        "paths": [
-          { "row": 2, "col": 1 },
-          { "row": 1, "col": 1 },
-          { "row": 1, "col": 2 },
-          { "row": 1, "col": 3 },
-          { "row": 2, "col": 3 },
-          { "row": 3, "col": 3 }
-        ]
-      },
-      {
-        "level": 6,
-        "paths": [
-          { "row": 4, "col": 3 },
-          { "row": 4, "col": 2 },
-          { "row": 3, "col": 2 },
-          { "row": 3, "col": 1 },
-          { "row": 2, "col": 1 },
-          { "row": 1, "col": 1 },
-          { "row": 1, "col": 2 },{ "row": 1, "col": 3 },{ "row": 1, "col": 4 },{ "row": 2, "col": 4 }
-        ]
-      },
+        { "row": 1, "col": 1 },
+        { "row": 2, "col": 1 },
+        { "row": 2, "col": 2 },
+        { "row": 2, "col": 3 }
+      ]
+    },
+    {
+      "level": 2,
+      "paths": [
+        { "row": 1, "col": 1 },
+        { "row": 1, "col": 2 },
+        { "row": 1, "col": 3 },
+       
+        { "row": 2, "col": 3 }
+      ]
+    },
+    {
+      "level": 3,
+      "paths": [
+        { "row": 1, "col": 1 },
+        { "row": 2, "col": 1 },
+        { "row": 2, "col": 2 },
+       
+        { "row": 2, "col": 3 },
+        { "row": 3, "col": 3 }
+      ]
+    },
+    {
+      "level": 4,
+      "paths": [
+        { "row": 1, "col": 3 },
+        { "row": 2, "col": 3 },
+        { "row": 2, "col": 2 },
+       
+        { "row": 2, "col": 1 },
+        { "row": 3, "col": 1 }
+      ]
+    },
+    {
+      "level": 5,
+      "paths": [
+        { "row": 2, "col": 1 },
+        { "row": 1, "col": 1 },
+        { "row": 1, "col": 2 },
+        { "row": 1, "col": 3 },
+        { "row": 2, "col": 3 },
+        { "row": 3, "col": 3 }
+      ]
+    },
+    {
+      "level": 6,
+      "paths": [
+        { "row": 4, "col": 3 },
+        { "row": 4, "col": 2 },
+        { "row": 3, "col": 2 },
+        { "row": 3, "col": 1 },
+        { "row": 2, "col": 1 },
+        { "row": 1, "col": 1 },
+        { "row": 1, "col": 2 },{ "row": 1, "col": 3 },{ "row": 1, "col": 4 },{ "row": 2, "col": 4 }
+      ]
+    },
+    {
+      "level": 7,
+      "paths": [
+        { "row": 1, "col": 1 },{ "row": 2, "col": 1 },{ "row": 2, "col": 2 },{ "row": 3, "col": 2 },{ "row": 3, "col": 3 },{ "row": 4, "col": 3 }
+       ,{ "row": 2, "col": 1 } ,{ "row": 4, "col": 4 }
+        
+      ]
+    }, 
+    {
+      "level": 8,
+      "paths": [
+        { "row": 3, "col": 4 },{ "row": 4, "col": 4 },{ "row": 3, "col": 3 },{ "row": 4, "col": 2 },{ "row": 3, "col": 2 },{ "row": 2, "col": 3 }
+        ,{ "row": 1, "col": 3 },{ "row": 1, "col": 2 },{ "row": 1, "col": 1 },{ "row": 2, "col": 1 }
+        
+      ]
+    },
+    {
+      "level": 9,
+      "paths": [
+        { "row": 4, "col": 4 },{ "row": 3, "col": 4 },{ "row": 3, "col": 3 },{ "row": 3, "col": 2 },{ "row": 4, "col": 2 },{ "row": 4, "col": 1 }
+        ,{ "row": 2, "col": 2 },{ "row": 2, "col": 1 },{ "row": 1, "col": 2 },{ "row": 1, "col": 3 },{ "row": 1, "col": 5 }
+        ,{ "row": 2, "col": 5 },{ "row": 1, "col": 4 }
+        
+      ]
+    },
+    {
+      "level": 10,
+      "paths": [
+        { "row": 1, "col": 4 },{ "row": 2, "col": 4 },{ "row": 2, "col": 3 },{ "row": 3, "col": 3 },{ "row": 4, "col": 3 },{ "row": 4, "col": 2 }
+        ,{ "row": 4, "col": 1 },{ "row": 3, "col": 1 },{ "row": 2, "col": 1 },{ "row": 1, "col": 1 },{ "row": 1, "col": 2 }
+        
+      ]
+    },
 
-
-      {
-        "level": 11,
-        "paths": [
-          { "row": 1, "col": 1 },{ "row": 2, "col": 1 },{ "row": 3, "col": 1 },{ "row": 4, "col": 1 },{ "row": 5, "col": 1 },{ "row": 6, "col": 1 },
-          { "row": 6, "col": 2 },{ "row": 6, "col": 3 },{ "row": 5, "col": 3 },{ "row": 4, "col": 3 },{ "row": 3, "col": 3 },{ "row": 2, "col": 4 },
-          { "row": 2, "col": 5 },{ "row": 2, "col": 6 }
-         
-        ]
-      },
-      {
-        "level": 12,
-        "paths": [
-          { "row": 2, "col": 1 },{ "row": 2, "col": 2 },{ "row": 1, "col": 2 },{ "row": 1, "col": 3 },{ "row": 1, "col": 4 },{ "row": 2, "col": 4 }
-          ,{ "row": 3, "col": 4 },{ "row": 3, "col": 3 },{ "row": 4, "col": 3 },{ "row": 4, "col": 2 },{ "row": 4, "col": 1 },{ "row": 5, "col": 1 }
-          ,{ "row": 6, "col": 1 },{ "row": 6, "col": 2 },{ "row": 6, "col": 3 },{ "row": 6, "col": 4 },{ "row": 6, "col": 5 },{ "row": 5, "col": 5 }
-          ,{ "row": 4, "col": 5 },{ "row": 4, "col": 6 }
-        ]
-      }
-      ,
-      {
-        "level": 13,
-        "paths": [
-          { "row": 3, "col": 6 },{ "row": 3, "col": 5 },{ "row": 2, "col": 5 },{ "row": 1, "col": 5 },{ "row": 1, "col": 4 },{ "row": 1, "col": 3 }
-          ,{ "row": 1, "col": 2 },{ "row": 1, "col": 1 },{ "row": 2, "col": 1 },{ "row": 3, "col": 1 },{ "row": 4, "col": 1 },{ "row": 4, "col": 1 }
-          ,{ "row": 4, "col": 2 },{ "row": 4, "col": 3 },{ "row": 3, "col": 3 },{ "row": 4, "col": 4 },{ "row": 5, "col": 3 },{ "row": 6, "col": 3 }
-          ,{ "row": 6, "col": 2 },{ "row": 6, "col": 1 }
-        ]
-      },
-      {
-        "level": 14,
-        "paths": [
-          { "row": 1, "col": 1 },{ "row": 1, "col": 2},{ "row": 1, "col": 3},{ "row": 1, "col": 4},{ "row": 1, "col": 5},{ "row": 1, "col": 6}
-          ,{ "row": 2, "col": 1},{ "row": 3, "col": 1},{ "row": 4, "col": 1},{ "row": 4, "col": 2},{ "row": 2, "col": 3},{ "row": 3, "col": 3}
-          ,{ "row": 4, "col": 3},{ "row": 5, "col": 3},{ "row": 4, "col": 4},{ "row": 4, "col": 5},{ "row": 2, "col": 6},{ "row": 3, "col": 6}
-          ,{ "row": 4, "col": 6},{ "row": 5, "col": 6},{ "row": 6, "col": 3},{ "row": 6, "col": 4},{ "row": 6, "col": 5},{ "row": 6, "col": 6}
-        ]
-      },
-      {
-        "level": 15,
-        "paths": [
-          { "row": 5, "col": 1 },{ "row": 5, "col": 2},{ "row": 4, "col": 2},{ "row": 3, "col": 2},{ "row": 3, "col": 1},{ "row": 2, "col": 1}
-          ,{ "row": 1, "col": 1},{ "row": 1, "col": 2},{ "row": 1, "col": 3},{ "row": 2, "col": 3},{ "row": 2, "col": 4},{ "row": 2, "col": 5}
-          ,{ "row": 2, "col": 6},{ "row": 3, "col": 6},{ "row": 4, "col": 6},{ "row": 4, "col": 5},{ "row": 4, "col": 4},{ "row": 5, "col": 4}
-          ,{ "row": 6, "col": 4},{ "row": 6, "col": 5},{ "row": 6, "col": 6}
-        ]
-      }
-    ]
-  }
-  
+    {
+      "level": 16,
+      "paths": [
+        { "row": 1, "col": 1 },{ "row": 2, "col": 1 },{ "row": 3, "col": 1 },{ "row": 4, "col": 1 },{ "row": 5, "col": 1 },{ "row": 6, "col": 1 },
+        { "row": 6, "col": 2 },{ "row": 6, "col": 3 },{ "row": 5, "col": 3 },{ "row": 4, "col": 3 },{ "row": 3, "col": 3 },{ "row": 2, "col": 4 },
+        { "row": 2, "col": 5 },{ "row": 2, "col": 6 }
+       
+      ]
+    },
+    {
+      "level": 12,
+      "paths": [
+        { "row": 2, "col": 1 },{ "row": 2, "col": 2 },{ "row": 1, "col": 2 },{ "row": 1, "col": 3 },{ "row": 1, "col": 4 },{ "row": 2, "col": 4 }
+        ,{ "row": 3, "col": 4 },{ "row": 3, "col": 3 },{ "row": 4, "col": 3 },{ "row": 4, "col": 2 },{ "row": 4, "col": 1 },{ "row": 5, "col": 1 }
+        ,{ "row": 6, "col": 1 },{ "row": 6, "col": 2 },{ "row": 6, "col": 3 },{ "row": 6, "col": 4 },{ "row": 6, "col": 5 },{ "row": 5, "col": 5 }
+        ,{ "row": 4, "col": 5 },{ "row": 4, "col": 6 }
+      ]
+    }
+    ,
+    {
+      "level": 13,
+      "paths": [
+        { "row": 3, "col": 6 },{ "row": 3, "col": 5 },{ "row": 2, "col": 5 },{ "row": 1, "col": 5 },{ "row": 1, "col": 4 },{ "row": 1, "col": 3 }
+        ,{ "row": 1, "col": 2 },{ "row": 1, "col": 1 },{ "row": 2, "col": 1 },{ "row": 3, "col": 1 },{ "row": 4, "col": 1 },{ "row": 4, "col": 1 }
+        ,{ "row": 4, "col": 2 },{ "row": 4, "col": 3 },{ "row": 3, "col": 3 },{ "row": 4, "col": 4 },{ "row": 5, "col": 3 },{ "row": 6, "col": 3 }
+        ,{ "row": 6, "col": 2 },{ "row": 6, "col": 1 }
+      ]
+    },
+    {
+      "level": 14,
+      "paths": [
+        { "row": 1, "col": 1 },{ "row": 1, "col": 2},{ "row": 1, "col": 3},{ "row": 1, "col": 4},{ "row": 1, "col": 5},{ "row": 1, "col": 6}
+        ,{ "row": 2, "col": 1},{ "row": 3, "col": 1},{ "row": 4, "col": 1},{ "row": 4, "col": 2},{ "row": 2, "col": 3},{ "row": 3, "col": 3}
+        ,{ "row": 4, "col": 3},{ "row": 5, "col": 3},{ "row": 4, "col": 4},{ "row": 4, "col": 5},{ "row": 2, "col": 6},{ "row": 3, "col": 6}
+        ,{ "row": 4, "col": 6},{ "row": 5, "col": 6},{ "row": 6, "col": 3},{ "row": 6, "col": 4},{ "row": 6, "col": 5},{ "row": 6, "col": 6}
+      ]
+    },
+    {
+      "level": 15,
+      "paths": [
+        { "row": 5, "col": 1 },{ "row": 5, "col": 2},{ "row": 4, "col": 2},{ "row": 3, "col": 2},{ "row": 3, "col": 1},{ "row": 2, "col": 1}
+        ,{ "row": 1, "col": 1},{ "row": 1, "col": 2},{ "row": 1, "col": 3},{ "row": 2, "col": 3},{ "row": 2, "col": 4},{ "row": 2, "col": 5}
+        ,{ "row": 2, "col": 6},{ "row": 3, "col": 6},{ "row": 4, "col": 6},{ "row": 4, "col": 5},{ "row": 4, "col": 4},{ "row": 5, "col": 4}
+        ,{ "row": 6, "col": 4},{ "row": 6, "col": 5},{ "row": 6, "col": 6}
+      ]
+    }
+  ]
+}
