@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      montain-clouds-blender-3d-model-obj-fbx-stl-blend_0: 401729155975743788
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

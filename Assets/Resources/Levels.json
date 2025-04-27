@@ -99,6 +99,52 @@
         
       ]
     },
+    {
+      "level": 11,
+      "paths": [
+        { "row": 5, "col": 5 },{ "row": 4, "col": 5 },{ "row": 4, "col": 4 },{ "row": 4, "col": 3 },{ "row": 5, "col": 3 },{ "row": 5, "col": 2 }
+        ,{ "row": 5, "col": 1 },{ "row": 4, "col": 1 },{ "row": 3, "col": 1 },{ "row": 3, "col": 2 },{ "row": 2, "col": 2 },{ "row": 1, "col": 2 }
+        ,{ "row": 1, "col": 3 },{ "row": 1, "col": 4 },{ "row": 2, "col": 4 },{ "row": 2, "col": 5 }
+        
+      ]
+    },
+    {
+      "level": 12,
+      "paths": [
+        { "row": 5, "col": 3 },{ "row": 4, "col": 3 },{ "row": 4, "col": 2 },{ "row": 3, "col": 3 },{ "row": 4, "col": 1 },{ "row": 3, "col": 1 }
+        ,{ "row": 2, "col": 1 },{ "row": 2, "col": 2 },{ "row": 1, "col": 2 },{ "row": 1, "col": 3 },{ "row": 1, "col": 4 },{ "row": 2, "col": 4 }
+        ,{ "row": 2, "col": 5 },{ "row": 3, "col": 5 },{ "row": 4, "col": 5 },{ "row": 5, "col": 5 }
+        
+      ]
+    },
+    {
+      "level": 13,
+      "paths": [
+        { "row": 1, "col": 1 },{ "row": 2, "col": 1 },{ "row": 3, "col": 1 },{ "row": 4, "col": 1 },{ "row": 5, "col": 1 },{ "row": 5, "col": 2 }
+        ,{ "row": 5, "col": 3 },{ "row": 4, "col": 3 },{ "row": 3, "col": 2 },{ "row": 3, "col": 3 },{ "row": 2, "col": 3 },{ "row": 1, "col": 3 }
+        ,{ "row": 1, "col": 4 },{ "row": 1, "col": 5 },{ "row": 2, "col": 5 },{ "row": 3, "col": 4 } ,{ "row": 3, "col": 5 },{ "row": 4, "col": 5 }
+        ,{ "row": 5, "col": 5 }
+        
+      ]
+    },
+    {
+      "level": 14,
+      "paths": [
+        { "row": 1, "col": 1 },{ "row": 2, "col": 1 },{ "row": 2, "col": 2 },{ "row": 3, "col": 2 },{ "row": 4, "col": 2 },{ "row": 4, "col": 1 }
+        ,{ "row": 5, "col": 1 },{ "row": 5, "col": 2 },{ "row": 5, "col": 3 },{ "row": 5, "col": 4 },{ "row": 5, "col": 5 },{ "row": 4, "col": 5 }
+        ,{ "row": 4, "col": 4 },{ "row": 3, "col": 4 },{ "row": 2, "col": 4 },{ "row": 1, "col": 4 } ,{ "row": 1, "col": 3 },{ "row": 1, "col": 5 }
+        
+        
+      ]
+    },
+    {
+      "level": 15,
+      "paths": [
+        { "row": 1, "col": 1 },{ "row": 2, "col": 1 },{ "row": 3, "col": 1 },{ "row": 4, "col": 1 },{ "row": 5, "col": 1 },{ "row": 5, "col": 2 }
+        ,{ "row": 5, "col": 3 },{ "row": 5, "col": 4 },{ "row": 5, "col": 5 },{ "row": 4, "col": 5 },{ "row": 3, "col": 5 },{ "row": 2, "col": 5 }
+        ,{ "row": 1, "col": 5 },{ "row": 1, "col": 4 },{ "row": 1, "col": 3 },{ "row": 2, "col": 3 } ,{ "row": 3, "col": 3 }
+      ]
+    },
 
     {
       "level": 16,
@@ -110,7 +156,7 @@
       ]
     },
     {
-      "level": 12,
+      "level": 17,
       "paths": [
         { "row": 2, "col": 1 },{ "row": 2, "col": 2 },{ "row": 1, "col": 2 },{ "row": 1, "col": 3 },{ "row": 1, "col": 4 },{ "row": 2, "col": 4 }
         ,{ "row": 3, "col": 4 },{ "row": 3, "col": 3 },{ "row": 4, "col": 3 },{ "row": 4, "col": 2 },{ "row": 4, "col": 1 },{ "row": 5, "col": 1 }
@@ -120,7 +166,7 @@
     }
     ,
     {
-      "level": 13,
+      "level": 18,
       "paths": [
         { "row": 3, "col": 6 },{ "row": 3, "col": 5 },{ "row": 2, "col": 5 },{ "row": 1, "col": 5 },{ "row": 1, "col": 4 },{ "row": 1, "col": 3 }
         ,{ "row": 1, "col": 2 },{ "row": 1, "col": 1 },{ "row": 2, "col": 1 },{ "row": 3, "col": 1 },{ "row": 4, "col": 1 },{ "row": 4, "col": 1 }
@@ -129,7 +175,7 @@
       ]
     },
     {
-      "level": 14,
+      "level": 19,
       "paths": [
         { "row": 1, "col": 1 },{ "row": 1, "col": 2},{ "row": 1, "col": 3},{ "row": 1, "col": 4},{ "row": 1, "col": 5},{ "row": 1, "col": 6}
         ,{ "row": 2, "col": 1},{ "row": 3, "col": 1},{ "row": 4, "col": 1},{ "row": 4, "col": 2},{ "row": 2, "col": 3},{ "row": 3, "col": 3}
@@ -138,7 +184,7 @@
       ]
     },
     {
-      "level": 15,
+      "level": 20,
       "paths": [
         { "row": 5, "col": 1 },{ "row": 5, "col": 2},{ "row": 4, "col": 2},{ "row": 3, "col": 2},{ "row": 3, "col": 1},{ "row": 2, "col": 1}
         ,{ "row": 1, "col": 1},{ "row": 1, "col": 2},{ "row": 1, "col": 3},{ "row": 2, "col": 3},{ "row": 2, "col": 4},{ "row": 2, "col": 5}
