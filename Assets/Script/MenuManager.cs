@@ -13,7 +13,10 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Button[] levelButtons; // Assign buttons in Inspector
 
     [SerializeField] private TMP_Text score;
-     int buttonsstrength ;
+    [SerializeField] private TMP_Text GemsText;
+    [SerializeField] private TMP_Text CoinsText;
+
+    int buttonsstrength ;
     [Header("Settings")]
     [SerializeField] private GameObject settings;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -44,12 +47,18 @@ public class MenuManager : MonoBehaviour
 
         bgmSlider.onValueChanged.AddListener(SetBGMVolume);
         sfxSlider.onValueChanged.AddListener(SetSFXVolume);
+
+
+        //Gems and Coins
+        GemsText.text = GameManager.Instance.Gems.ToString();
+        score.text = GameManager.Instance.score.ToString();
+        CoinsText.text = GameManager.Instance.coins.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        score.text = GameManager.Instance.score.ToString();
+       
     }
 
     #region Music

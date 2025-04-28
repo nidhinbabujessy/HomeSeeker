@@ -584,6 +584,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 0
+  Gems: 0
+  coins: 0
   CurrentLevel: 0
   pivotCurrent: 0
   pivotNext: 1
@@ -811,6 +813,8 @@ MonoBehaviour:
   winClip: {fileID: 8300000, guid: 8cb724044a9e6074289f8b247293f221, type: 3}
   starClip: {fileID: 8300000, guid: 155d8cf48ab26f54a9b357024b0fbed7, type: 3}
   failClip: {fileID: 8300000, guid: 7dc7f7ef2d6363b4eb798c6ae03e394a, type: 3}
+  gems: {fileID: 8300000, guid: 6ea590616b98d58408fd141fc3ccaec2, type: 3}
+  coins: {fileID: 8300000, guid: 146ee7facf7d7b6449c9b3226bb14da6, type: 3}
 --- !u!1 &1156224581
 GameObject:
   m_ObjectHideFlags: 0

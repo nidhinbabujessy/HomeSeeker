@@ -19,6 +19,8 @@ public class SoundManager : MonoBehaviour
     public AudioClip winClip;
     public AudioClip starClip;
     public AudioClip failClip;
+    public AudioClip gems;
+    public AudioClip coins;
 
     private const string BGM_VOLUME_KEY = "BGM_VOLUME";
     private const string SFX_VOLUME_KEY = "SFX_VOLUME";
@@ -76,6 +78,9 @@ public class SoundManager : MonoBehaviour
     public void PlayWin() => PlaySFX(winClip);
     public void PlayStar() => PlaySFX(starClip);
     public void PlayFail() => PlaySFX(failClip);
+
+    public void PlayGem() => PlaySFX(gems); 
+    public void PlayCoin() => PlaySFX(coins);
 
     // 🔊 Volume control
     public void SetBGMVolume(float volume)

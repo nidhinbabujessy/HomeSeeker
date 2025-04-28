@@ -11,6 +11,12 @@ public class GameManager : MonoBehaviour
     public int score = 0;
     private const string ScoreKey = "PlayerScore";
 
+    public int Gems = 0;
+    private const string GemsKey = "PlayerGems";
+    public int coins = 0;
+    private const string coinsKey = "PlayerCoins";
+
+
     [Header("Level Settings")]
     public int CurrentLevel = 0;
     public int pivotCurrent = 0;
@@ -49,6 +55,8 @@ public class GameManager : MonoBehaviour
        // LevelUpdate();
         LoadScore();
         LoadLevelData();
+        LoadGem();
+        LoadCoin();
 
     }
 
@@ -91,6 +99,73 @@ public class GameManager : MonoBehaviour
     void ClearSavedScore()
     {
         PlayerPrefs.DeleteKey(ScoreKey);
+    }
+
+    #endregion
+    #region Gem Management
+
+    public void AddGem(int value)
+    {
+        Gems += value;
+        SaveGem();
+        Debug.Log("Score Added: " + value);
+    }
+
+    public void ResetGem()
+    {
+        Gems = 0;
+        SaveGem();
+    }
+
+    private void SaveGem()
+    {
+        PlayerPrefs.SetInt(GemsKey, Gems);
+        PlayerPrefs.Save();
+    }
+
+    private void LoadGem()
+    {
+        Gems = PlayerPrefs.GetInt(GemsKey, 0);
+    }
+
+    void ClearSavedGem()
+    {
+        PlayerPrefs.DeleteKey(GemsKey);
+    }
+
+    #endregion
+
+
+    #region Coin Management
+
+    public void AddCoin(int value)
+    {
+        coins += value;
+        SaveCoin();
+        Debug.Log("coins Added: " + value);
+
+    }
+
+    public void ResetCoin()
+    {
+        coins = 0;
+        SaveCoin();
+    }
+
+    private void SaveCoin()
+    {
+        PlayerPrefs.SetInt(coinsKey, coins);
+        PlayerPrefs.Save();
+    }
+
+    private void LoadCoin()
+    {
+        coins = PlayerPrefs.GetInt(coinsKey, 0);
+    }
+
+    void ClearSavedCoin()
+    {
+        PlayerPrefs.DeleteKey(coinsKey);
     }
 
     #endregion
@@ -182,6 +257,8 @@ public class GameManager : MonoBehaviour
     public void ClearSavedLevelData()
     {
         ClearSavedScore();
+        ClearSavedGem();
+        ClearSavedCoin();
         SoundManager.Instance.ResetVolumes();
         PlayerPrefs.DeleteKey(CurrentLevelKey);
         PlayerPrefs.DeleteKey(NextLevelKey);
@@ -201,6 +278,13 @@ public class GameManager : MonoBehaviour
         pivotCurrent = 0;
         pivotNext = 1;
         PlayerPrefs.Save();
+
+        // Load data 
+        LoadScore();
+        LoadLevelData();
+        LoadGem();
+        LoadCoin();
+
     }
 
 

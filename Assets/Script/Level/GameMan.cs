@@ -4,15 +4,16 @@ using TMPro;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using static UnityEngine.GraphicsBuffer;
+using UnityEngine.Assertions.Must;
 
 public class GameMan : MonoBehaviour
 {
-    public static GameMan instance {  get; private set; }
+    public static GameMan instance { get; private set; }
 
 
     [SerializeField] private GameObject squarePrefab;
     [SerializeField] private GameObject pathPrefab;
-   // [SerializeField] private GameObject Ball;
+    // [SerializeField] private GameObject Ball;
     [SerializeField] private GameObject firstObject;
     [SerializeField] private GameObject lastObjectWin;
     [SerializeField] private GameObject borderObject;
@@ -30,7 +31,7 @@ public class GameMan : MonoBehaviour
 
     [Header("Timer ")]
     [SerializeField] private TMP_Text TimerText;
-    public int Time=15;
+    public int Time = 15;
 
     [Header("Timer ")]
     [SerializeField] private TMP_Text Scoretext;
@@ -41,6 +42,15 @@ public class GameMan : MonoBehaviour
     [Header("Score ")]
     public int score;
     [SerializeField] private TMP_Text Highscore;
+
+    [Header("gem and coin")]
+    int gemTemp = 0;
+    int coinTemp = 0;
+    //  [SerializeField] private TMP_Text GemTempText;
+    [SerializeField] private TMP_Text GemWinText;
+    [SerializeField] private TMP_Text CoinWinText;
+
+
 
     //SLPASH ANIMATION
     public Transform target;
@@ -68,7 +78,7 @@ public class GameMan : MonoBehaviour
 
     private void Start()
     {
-      
+
         // levelNext();
         int index = GameManager.Instance.LevelIndex;
         print(index);
@@ -78,18 +88,22 @@ public class GameMan : MonoBehaviour
         ResetGame();
         SPASHPARENT.SetActive(true);
         StartCoroutine(WaitAndLoadLevel());
-        
+
+
+
+        gemTemp = 0;
+
 
     }
 
     #region splash animation
     IEnumerator WaitAndLoadLevel()
     {
-       
-        ThrowBall(SPASH,SPASHPARENT);
+
+        ThrowBall(SPASH, SPASHPARENT);
         yield return new WaitForSeconds(2f);
 
-     //   SPASHPARENT.SetActive(false);
+        //   SPASHPARENT.SetActive(false);
         // You can replace this with a dynamic level name like "Level_1", "Level_2", etc.
 
     }
@@ -270,7 +284,7 @@ public class GameMan : MonoBehaviour
                 {
                     tile = Instantiate(borderObject, spawnPos, Quaternion.identity, parent);
                     tile.transform.localScale = squareSize;
-                    tile.tag = "Border"; // Set this in Unity tag manager too
+                    //  tile.tag = "Border"; // Set this in Unity tag manager too
                     continue; // Skip placing square or path if it's a border
                 }
 
@@ -284,26 +298,35 @@ public class GameMan : MonoBehaviour
                 if (isPath)
                 {
                     print("its path");
+
                     PathTile currentTile = currentPathTiles.Find(p => p.row == row && p.col == col);
-                    print("current tile = "+currentTile);
+                    print("current tile = " + currentTile);
+
                     if (currentTile.Equals(currentPathTiles[0]))
                     {
                         firstTileObject = tile;
-                        Debug.Log("1 last Path tile at: " + tile);
+                        Debug.Log("First Path tile at: " + tile);
                     }
-                    if (currentTile.Equals(currentPathTiles[currentPathTiles.Count - 1]))
+                    else if (currentTile.Equals(currentPathTiles[currentPathTiles.Count - 1]))
                     {
                         lastTileObject = tile;
-                        Debug.Log("1 last Path tile at: " + tile);
-
+                        Debug.Log("Last Path tile at: " + tile);
                     }
-
-                    Debug.Log("Path tile at: " + row + "," + col);
+                    else
+                    {
+                        Debug.Log("Middle Path tile at: " + row + "," + col);
+                        GemSpawner gemSpaner = tile.GetComponent<GemSpawner>();
+                        if (gemSpaner != null)
+                        {
+                            gemSpaner.GemSpawn();
+                        }
+                    }
                 }
+
             }
         }
 
-       
+
 
         if (firstTileObject != null)
         {
@@ -311,7 +334,7 @@ public class GameMan : MonoBehaviour
             firstObject.transform.position = firstTileObject.transform.position;
             Ball.Instance.InitialStage();
 
-      
+
 
         }
 
@@ -322,7 +345,7 @@ public class GameMan : MonoBehaviour
             lastObjectWin.transform.position = lastTileObject.transform.position;
             Debug.Log("2 last Path tile at: " + lastTileObject);
         }
-      
+
     }
 
     #endregion
@@ -362,7 +385,7 @@ public class GameMan : MonoBehaviour
             {
                 GameManager.Instance.LevelIndex = GameManager.Instance.CurrentLevel;
             }
-           
+
         }
         else
         {
@@ -396,14 +419,14 @@ public class GameMan : MonoBehaviour
     void ResetGame()
     {
 
-       // Ball.Instance.startstage();
+        // Ball.Instance.startstage();
         win.SetActive(false);
         lose.SetActive(false);
         // Destroy(lastObjectWin);
         WinNFailPopUp.Instance.winReset();
 
         //time
-        currentTime=0;
+        currentTime = 0;
     }
     #endregion
 
@@ -418,12 +441,19 @@ public class GameMan : MonoBehaviour
         WinNFailPopUp.Instance.StarEnable();
         GameManager.Instance.AddScore(WinNFailPopUp.Instance.scoreEarned);
         loadScore();
-       if (GameManager.Instance.NextLevel == GameManager.Instance.LevelIndex)
+        if (GameManager.Instance.NextLevel == GameManager.Instance.LevelIndex)
         {
             print(GameManager.Instance.NextLevel + "---");
             GameManager.Instance.LevelUpdate();
         }
-      
+
+        // GEM
+        GameManager.Instance.AddGem(gemTemp);
+        GemWinText.text = gemTemp.ToString();
+
+        GameManager.Instance.AddCoin(coinTemp);
+        CoinWinText.text = coinTemp.ToString();
+
 
     }
     #endregion
@@ -467,7 +497,7 @@ public class GameMan : MonoBehaviour
     private void TimerEnd()
     {
         Debug.Log("⏰ Time's up!");
-        lose.SetActive(true );
+        lose.SetActive(true);
         SoundManager.Instance.PlayFail();        // Add game over, next level, or popup logic here
     }
     //==================================================================
@@ -486,10 +516,32 @@ public class GameMan : MonoBehaviour
 
     void loadScore()
     {
-        score= GameManager.Instance.score;
-        Scoretext.text=score.ToString();
-        Highscore.text=score.ToString();
+        score = GameManager.Instance.score;
+        Scoretext.text = score.ToString();
+        Highscore.text = score.ToString();
         print("score loaded");
+    }
+
+    #endregion
+
+    #region gem
+
+
+    public void gemTempAdd()
+    {
+        gemTemp++;
+        //  GemTempText.text =gemTemp.ToString();
+    }
+
+    #endregion
+
+    #region COin
+
+
+    public void coinTempAdd()
+    {
+        coinTemp++;
+        //  GemTempText.text =gemTemp.ToString();
     }
 
     #endregion
@@ -500,7 +552,7 @@ public class GameMan : MonoBehaviour
     public void exitEnable()
     {
         SoundManager.Instance.PlayClick();
-        exit.SetActive(true );
+        exit.SetActive(true);
         GameManager.Instance.timeStop();
     }
     public void exitdisable()

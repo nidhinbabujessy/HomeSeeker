@@ -118,6 +118,22 @@ public class Ball : MonoBehaviour
             cage.SetActive(true);
             Input.gyro.enabled = false;
         }
+        if (collision.gameObject.CompareTag("Gem"))
+        {
+            SoundManager.Instance.PlayGem();
+            GameMan.instance.gemTempAdd();
+            collision.gameObject.SetActive(false);
+           
+            
+        }
+        if (collision.gameObject.CompareTag("Coin"))
+        {
+            SoundManager.Instance.PlayCoin();
+            GameMan.instance.coinTempAdd();
+            collision.gameObject.SetActive(false);
+
+
+        }
     }
     #endregion
 }
