@@ -84,17 +84,7 @@ public class WinNFailPopUp : MonoBehaviour
         // 2. Reset score
         scoreEarned = 0;
 
-        //// 3. Reset score text (if TMP_Text)
-        //TMP_Text scoreTMP = scoreText.GetComponent<TMP_Text>();
-        //if (scoreTMP != null)
-        //{
-        //    scoreTMP.text = "Score: 0";
-        //}
-
-        // 4. Optionally reset time variables
-        //time = 0;
-        //currenttime = 0;
-
+       
         // 5. Cancel any LeanTweens (optional but good for safety)
         LeanTween.cancel(scoreText);
     }

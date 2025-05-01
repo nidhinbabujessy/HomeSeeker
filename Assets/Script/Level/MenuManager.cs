@@ -160,12 +160,12 @@ public class MenuManager : MonoBehaviour
 
     public void Play()
     {
-        SoundManager.Instance.PlayClick();
-        if (GameManager.Instance.LevelIndex>GameManager.Instance.PlayIndex)
-        {
-            GameManager.Instance.PlayIndex=GameManager.Instance.LevelIndex;
-        }
-        GameManager.Instance.LevelIndex=GameManager.Instance.LevelIndex;
+        //SoundManager.Instance.PlayClick();
+        //if (GameManager.Instance.LevelIndex>GameManager.Instance.PlayIndex)
+        //{
+        //    GameManager.Instance.PlayIndex=GameManager.Instance.LevelIndex;
+        //}
+        GameManager.Instance.LevelIndex=GameManager.Instance.NextLevel;
         SceneManager.LoadScene("SampleScene");
 
     }

@@ -200,18 +200,25 @@ public class GameManager : MonoBehaviour
     public void LevelUpdate()
     {
         printlevel();
-        if (pivotCurrent == LevelIndex)
+        if (pivotCurrent != CurrentLevel)
         {
+            print("pivot current == level index");
             pivotNext++;
+            
            // if (pivotNext > 1)
             {
                 pivotCurrent++;
             }
-            
+            LevelIndex = pivotNext;
+            LevelIndex++;
+            print(LevelIndex + "++----------------------------------");
+
         }
         else
         {
             NextLevel++;
+            LevelIndex=NextLevel;
+            LevelIndex++;
            // if (NextLevel > 1)
             {
                 CurrentLevel++;

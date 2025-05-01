@@ -24,7 +24,9 @@ public class Ball : MonoBehaviour
 
     private SpriteRenderer cageRenderer;
 
-    bool gyroMove;
+    public bool gyroMove;
+
+   
 
     private Vector3 initialPosition;
 
@@ -48,12 +50,14 @@ public class Ball : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (gyroMove==true)
-        {
-            Vector3 gravity = Input.gyro.gravity;
-            Vector2 movement = new Vector2(gravity.x, gravity.y) * moveSpeed;
-            rb.linearVelocity = movement;
-        }
+       
+            if (gyroMove == true)
+            {
+                Vector3 gravity = Input.gyro.gravity;
+                Vector2 movement = new Vector2(gravity.x, gravity.y) * moveSpeed;
+                rb.linearVelocity = movement;
+            }
+        
     }
 
 
@@ -73,7 +77,7 @@ public class Ball : MonoBehaviour
             LeanTween.alpha(cage, 0f, 0.5f).setOnComplete(() =>
             {
                 cage.SetActive(false); // or Destroy(cage);
-                gyroMove = true;
+              //  gyroMove = true;
                 Input.gyro.enabled = true;
                 rb.bodyType = RigidbodyType2D.Dynamic;
                 GameMan.instance.TimeStart();
@@ -81,6 +85,7 @@ public class Ball : MonoBehaviour
           //  Input.gyro.enabled = true;
            
         }
+        
 
     }
 

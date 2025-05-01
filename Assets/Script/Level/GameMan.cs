@@ -364,6 +364,7 @@ public class GameMan : MonoBehaviour
         else
         {
             GameManager.Instance.LevelIndex = GameManager.Instance.pivotNext;
+            GameManager.Instance.LevelIndex++;
             print("level index = pivot next");
         }
 
@@ -465,9 +466,12 @@ public class GameMan : MonoBehaviour
     public int currentTime;
     private Coroutine timerCoroutine;
 
+    int maxTime;
+
     public void TimeStart()
     {
         currentTime = Time;
+        maxTime = Time;
         UpdateTimerText();
 
         if (timerCoroutine != null)
@@ -483,6 +487,10 @@ public class GameMan : MonoBehaviour
             yield return new WaitForSeconds(1f);
             currentTime--;
             UpdateTimerText();
+            if(currentTime<maxTime)
+            {
+                Ball.Instance.gyroMove = true;
+            }
         }
 
         TimerEnd(); // Optional: Handle when timer reaches 0

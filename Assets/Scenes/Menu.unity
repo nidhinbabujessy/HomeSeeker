@@ -3812,6 +3812,9 @@ MonoBehaviour:
   - {fileID: 136076679}
   - {fileID: 1111181724}
   - {fileID: 526855002}
+  - {fileID: 1082446536}
+  - {fileID: 895443452}
+  - {fileID: 1962367438}
   score: {fileID: 775497216}
   GemsText: {fileID: 938083149}
   CoinsText: {fileID: 1823698405}
